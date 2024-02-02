@@ -38,30 +38,30 @@ def create_report(response, keyspace):
     usage = response.usage
     logging.info(f"Model usage - Prompt tokens: {usage.prompt_tokens}, Completion tokens: {usage.completion_tokens}, Total tokens: {usage.total_tokens}")
     
+def create_prompt(schema_statements):
 
-def ask_gpt_about_schema(schema_statements, question):
+    with open("helper_docs/prompt_question.txt", 'r') as f:
+        question = f.read()
+
+    prompt = f"Given the schema: \n{' '.join(schema_statements)}\n\nAnswer the following questions:\n\n{question}"
+
+    logging.info(f"Prompt created: {prompt}")
+    return prompt
+
+def ask_gpt_about_schema(prompt, config):
     client = OpenAI()
-
-
-    with open("helper_docs/cassandra_vector.txt", 'r') as f:
-        helper_text = f.read()
-
-    print(helper_text)
-    question += helper_text
-
-    print(f"\n\nPrompting GPT-4 with the following question: {question}")
-
-    # Combine schema statements into a single prompt
-    prompt = f"Given the schema: \n{' '.join(schema_statements)}\n\n{question}"
     
+    logging.info("Asking OpenAI about the schema")
+
     response = client.chat.completions.create(
-        model="gpt-4-turbo-preview",
+        model=config['openai_model'],
         messages=[
-            {"role": "system", "content": "You are an Apache Cassandra expert at data modeling and Generative AI strategy."},
+            {"role": "system", "content": config['model_system_role']},
             {"role": "user", "content": prompt},
         ]   
     )
-  
+    logging.info(f"Received response from OpenAI:")
+
     return response
 
 
@@ -78,13 +78,8 @@ def main():
     config = load_config()
     config["logging"] = logging
 
-    # Set the environment variables
-
-    openai_api_key = config['openai_api_key']
-
     # Set the OpenAI API key
-    os.environ['OPENAI_API_KEY'] = openai_api_key
-
+    os.environ['OPENAI_API_KEY'] = config['openai_api_key']
 
     # Connect to the Astra database
     session = cassandra_utils.connect_to_astra(config)
@@ -93,10 +88,10 @@ def main():
     statements = cassandra_utils.generate_create_table_statements(session, config)
 
     logging.info(f"Generated {len(statements)} CREATE TABLE statements")
-    logging.info(f"\n\n{statements}")
 
-    question = "Evaluate this Cassandra Query Language (CQL) schema. Categorize the use case or use cases. Provide a synopsis of what type of application this schema supports. What type of generative AI features could be added to this data model? Include the use of Cassandra Vector Data support. Suggest data model changes for each Generative AI suggestion with suggested queries using this guide: "
-    response = ask_gpt_about_schema(statements, question)
+    prompt = create_prompt(statements)
+
+    response = ask_gpt_about_schema(prompt, config)
 
     create_report(response, config['keyspace'])
 

@@ -1,7 +1,13 @@
-# Set the environment variables
+# Astra information
 client_id: ""
 client_secret: ""
-secure_connect_bundle_path: "./secure-connect-<name>.zip"
+secure_connect_bundle_path: ""
 keyspace: ""
+
+# Logging 
+log_level: ""
+
+# OpenAI
 openai_api_key: ""
-log_level: INFO
+openai_model: ""
+model_system_role: ""

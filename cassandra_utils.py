@@ -4,11 +4,15 @@ from cassandra.auth import PlainTextAuthProvider
 # Function to fetch and generate CREATE TABLE statements
 def generate_create_table_statements(session, config):
     keyspace = config['keyspace']
+    logging = config["logging"]
 
     create_table_statements = []
     
+    logging.info(f"Fetching tables for keyspace: {keyspace}")
     tables = session.execute(f"SELECT * FROM system_schema.tables WHERE keyspace_name = '{keyspace}'")
     
+    logging.info(f"Fetched tables")
+
     for table in tables:
         table_name = table.table_name
         create_stmt = f"CREATE TABLE {keyspace}.{table_name} ("
@@ -30,6 +34,9 @@ def generate_create_table_statements(session, config):
             create_stmt += ")"
         
         create_stmt += "\n);"
+        
+        logging.info(create_stmt)
+        
         create_table_statements.append(create_stmt)
     
     return create_table_statements
@@ -38,7 +45,6 @@ def connect_to_astra(config):
     client_id = config['client_id']
     client_secret = config['client_secret']
     secure_connect_bundle_path = config['secure_connect_bundle_path']
-    keyspace = config['keyspace']
     logging = config["logging"]
 
     # Configure the connection
@@ -48,7 +54,11 @@ def connect_to_astra(config):
     }
 
     # Establish the connection
+    logging.info("Connecting to Astra database")
+    
     cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
     session = cluster.connect()
     
+    logging.info("Connected to Astra database")
+
     return session
