@@ -68,9 +68,6 @@ def ask_gpt_about_schema(schema_statements, question):
     # Combine schema statements into a single prompt
     prompt = f"Given the schema: \n{' '.join(schema_statements)}\n\n{question}"
     
-    # Assuming OpenAI API key is set in environment or defined elsewhere
-    #openai.api_key = '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'
-    
     response = client.chat.completions.create(
         model="gpt-4-turbo-preview",
         messages=[
