@@ -1,0 +1,7 @@
+# Set the environment variables
+client_id: ""
+client_secret: ""
+secure_connect_bundle_path: "./secure-connect-<name>.zip"
+keyspace: ""
+openai_api_key: ""
+log_level: INFO
