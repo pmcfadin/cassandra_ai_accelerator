@@ -2,7 +2,7 @@
 ![Turtles all the way down image](image.png)
 Using GenAI to make more GenAI. Turtles all the way down...
 
-This project is a Python application that interacts with  DataStax Astra to generate CREATE TABLE statements for a given keyspace and uses them to create reccomended use cases for Generative AI.
+This project is a Python application that interacts with  DataStax Astra to generate CREATE TABLE statements for a given keyspace and uses them to create recommended use cases for Generative AI.
 
 The output is a Markdown formatted report you can find in `report_output` It will describe the use case(s) for your schema and suggest any GenAI use cases you could add. It will then give you the exact table changes needed to implement the idea you want!
 
@@ -42,7 +42,7 @@ Before running the application, you need to set up your configuration in the `ex
 - `keyspace`: The keyspace to generate CREATE TABLE statements for.
 - `logging`: The logging level.
 - `openai_api_key`: Single use key from OpenAI
-- `openai_model`: GPT model. Default included 
+- `openai_model`: GPT model. Default included
 - `model_system_role`: Role info to model. Default is probably fine
 
 ### Usage
@@ -96,7 +96,7 @@ Generative AI can automatically generate summaries for videos based on the video
   WITH CLUSTERING ORDER BY (videoid ASC);
   ```
 
-### 2. Advanced Video Recommendations 
+### 2. Advanced Video Recommendations
 
 Improve recommendation systems by incorporating vector-based similarity search on user preferences, video descriptions, and user interactions.
 
