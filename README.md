@@ -43,7 +43,7 @@ Before running the application, you need to set up your configuration in the `ex
 - `logging`: The logging level.
 - `openai_api_key`: Single use key from OpenAI
 - `openai_model`: GPT model. Default included
-- `model_system_role`: Role info to model. Default is probably fine
+- `model_system_role`: Role info to model. The default is probably fine
 
 ### Usage
 
@@ -55,12 +55,12 @@ python turtle_dive.py
 
 ### Todo List
  - Allow for Local LLM usage. Privacy concerns
- - Fine tune an LLM for this specific task (Better answers)
+ - Fine-tune an LLM for this specific task (Better answers)
  - Make the use case exploration interactive for more specific use cases
  - Allow for either Astra or Cassandra targets (Shouldn't be hard. Just change the connect type)
  - Add more types of reports. SAI conversion. Schema optimization
  - Analyze data and suggest how data could be vectorized
- - (Stretch) Create sample code for LlangChain or LlamaIndex or ...
+ - (Stretch) Create sample code for LangChain or LlamaIndex or ...
 ---
 ### Sample report output
 
