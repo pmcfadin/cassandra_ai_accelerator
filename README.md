@@ -52,6 +52,15 @@ To run the application, execute the `turtle_dive.py` script:
 ```sh
 python turtle_dive.py
 ```
+
+### Todo List
+ - Allow for Local LLM usage. Privacy concerns
+ - Fine tune an LLM for this specific task (Better answers)
+ - Make the use case exploration interactive for more specific use cases
+ - Allow for either Astra or Cassandra targets (Shouldn't be hard. Just change the connect type)
+ - Add more types of reports. SAI conversion. Schema optimization
+ - Analyze data and suggest how data could be vectorized
+ - (Stretch) Create sample code for LlangChain or LlamaIndex or ...
 ---
 ### Sample report output
 
