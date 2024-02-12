@@ -1,0 +1,8 @@
+# Mode of operation: ASTRA, CASSANDRA, FILE
+mode = "ASTRA"
+
+# Logging 
+log_level = "INFO"
+
+# OpenAI
+model_system_role = "You are an Apache Cassandra expert at data modeling and Generative AI strategy."
