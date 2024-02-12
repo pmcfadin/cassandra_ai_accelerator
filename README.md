@@ -36,14 +36,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 Before running the application, you need to set up your configuration in the `example-config.yaml` file:
 
+- `mode`: Operating mode. ASTRA is the only current choice
+- `log_level`: The logging level. Default is 
+- `model_system_role`: Role info to model. The default is probably fine
+- `openai_model`: GPT model. Default included
+
+For sensative data, rename the `example.settings.toml` file into `.settings.toml` and change the following
 - `client_id`: Your Astra DB client ID.
 - `client_secret`: Your Astra DB client secret.
 - `secure_connect_bundle_path`: The path to your Astra DB secure connect bundle.
 - `keyspace`: The keyspace to generate CREATE TABLE statements for.
-- `logging`: The logging level.
 - `openai_api_key`: Single use key from OpenAI
-- `openai_model`: GPT model. Default included
-- `model_system_role`: Role info to model. The default is probably fine
 
 ### Usage
 
