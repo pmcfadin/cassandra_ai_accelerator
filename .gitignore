@@ -168,3 +168,17 @@ cython_debug/
 *.p12
 *.pfx
 config.yaml
+secure-connect*
+*-token.json
+
+# Ignore dynaconf secret files
+.secrets.*
+
+# Ignore temp directory
+temp/
+
+# Ignore logs
+log/
+
+# Ignore reports
+report_output/

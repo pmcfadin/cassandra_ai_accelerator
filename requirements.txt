@@ -1,2 +1,4 @@
 cassandra-driver
 openai
+dynaconf
+loguru
