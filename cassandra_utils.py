@@ -10,14 +10,17 @@ class CassandraUtils:
         self.client_id = settings.client_id
         self.client_secret = settings.client_secret
         self.secure_connect_bundle_path = settings.secure_connect_bundle_path
-        #logger.add(f"log/{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log", level=settings.log_level)
 
     def generate_create_table_statements(self):
         create_table_statements = []
         
         logger.info(f"Fetching tables for keyspace: {self.keyspace}")
         
-        session = self._connect_to_astra()
+        # Local mode or cloud
+        if settings.mode=="CASSANDRA":
+            session = self._connect_to_cassandra()
+        else:
+            session = self._connect_to_astra()
         
         tables = session.execute(f"SELECT * FROM system_schema.tables WHERE keyspace_name = '{self.keyspace}'")
         
@@ -64,4 +67,15 @@ class CassandraUtils:
         
         logger.info("Connected to Astra database")
 
+        return session
+    
+    def _connect_to_cassandra(self):
+
+        logger.info("Connecting to Cassandra cluster")
+            
+        cluster = Cluster([settings.cassandra_host], port=settings.cassandra_port)
+        session = cluster.connect()
+            
+        logger.info("Connected to Cassandra cluster")
+            
         return session

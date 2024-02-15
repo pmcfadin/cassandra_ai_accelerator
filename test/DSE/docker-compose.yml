@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  cassandra-dse:
+    image: datastax/dse-server:7.0.0-alpha.4
+    container_name: cassandra-dse
+    ports:
+      - "9042:9042"
+    environment:
+      - DS_LICENSE=accept
+    
