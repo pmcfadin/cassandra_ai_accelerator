@@ -1,5 +1,16 @@
 # Mode of operation: ASTRA, CASSANDRA, FILE
-mode = "ASTRA"
+#mode = "ASTRA"
+mode = "CASSANDRA"
+#mode = "FILE"
+
+
+# Cassandra connection
+cassandra_host = "127.0.0.1"
+cassandra_port = 9042
+keyspace = "killrvideo"
+
+# Schema file
+schema_directory = "test/schema"
 
 # Logging 
 log_level = "INFO"
