@@ -1,6 +1,6 @@
 # Mode of operation: ASTRA, CASSANDRA, FILE
-#mode = "ASTRA"
-mode = "CASSANDRA"
+mode = "ASTRA"
+#mode = "CASSANDRA"
 #mode = "FILE"
 
 
@@ -15,6 +15,21 @@ schema_directory = "test/schema"
 # Logging 
 log_level = "INFO"
 
+# LLM provider info: AZURE, GCP, BEDROCK, OLLAMA, OPENAI
+#llm_provider = "OPENAI"
+llm_provider = "BEDROCK"
+
+# Azure GPT
+
+# GCP VertexAI
+
+# AWS Bedrock
+aws_bedrock_model_name = "bedrock/anthropic.claude-instant-v1"
+aws_bedrock_max_tokens = 500
+aws_bedrock_temperature = 0.7
+
+# Ollama
+
 # OpenAI
-model_system_role = "You are an Apache Cassandra expert at data modeling and Generative AI strategy."
+openai_model_system_role = "You are an Apache Cassandra expert at data modeling and Generative AI strategy."
 openai_model = "gpt-4-turbo-preview"
