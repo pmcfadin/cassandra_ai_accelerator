@@ -6,6 +6,7 @@ import os
 import datetime
 from conf.config import settings
 from cassandra_utils import CassandraUtils
+import llm
 
 #initalize logging
 def initialize_logging(log_level="INFO"):
@@ -69,24 +70,28 @@ def ask_gpt_about_schema(prompt):
     return response
 
 def main():
+    
+    print("Starting application. Output will be logged to the log directory.")
     # Call the initialize_logging function to set up the logging mechanism
     initialize_logging(settings.log_level)
-
-    # Set the OpenAI API key
-    os.environ['OPENAI_API_KEY'] = settings.openai_api_key
 
     # Connect to the Astra database
     cassandra_utils = CassandraUtils()
 
     logger.info(f"Generating CREATE TABLE statements for keyspace: {settings.keyspace}")
+    print(f"Generating CREATE TABLE statements for keyspace: {settings.keyspace}")
     statements = cassandra_utils.generate_create_table_statements()
 
     logger.info(f"Generated {len(statements)} CREATE TABLE statements")
 
     prompt = create_prompt(statements)
 
-    response = ask_gpt_about_schema(prompt)
+    #response = ask_gpt_about_schema(prompt)
 
+    print(f"Sending prompt to LLM provider: {settings.llm_provider}")
+    response = llm.get_completeion(prompt)
+
+    print("Completed. Creating report")
     create_report(response, settings.keyspace)
 
 if __name__ == "__main__":

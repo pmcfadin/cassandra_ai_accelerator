@@ -2,3 +2,5 @@ cassandra-driver
 openai
 dynaconf
 loguru
+litellm
+boto3>=1.28.57
