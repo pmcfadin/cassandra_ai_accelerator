@@ -15,7 +15,7 @@ def get_completeion(prompt):
     elif settings.llm_provider == "VERTEXAI":
         response = _vertexai_completion(prompt)
     elif settings.llm_provider == "OLLAMA":
-        response = _ollama_compleation(prompt)
+        response = _ollama_completion(prompt)
     elif settings.llm_provider == "AZUREGPT":
         response = _azuregpt_completion(prompt)
     else:
@@ -61,9 +61,20 @@ def _bedrock_completion(prompt):
     return response
 
 def _vertexai_completion(prompt):
-    pass
+    os.environ["VERTEXAI_PROJECT"] = settings.vertexai_project_id
+    os.environ["VERTEXAI_LOCATION"] = settings.vertexai_location
 
-def _ollama_compleation(prompt):
+    response = completion(
+        settings.vertexai_model_name,
+        messages=[
+            {"role": "system", "content": settings.openai_model_system_role},
+            {"role": "user", "content": prompt},
+        ]
+    )
+
+    return response
+
+def _ollama_completion(prompt):
     pass
 
 def _azuregpt_completion(prompt):

@@ -1,7 +1,7 @@
 # Mode of operation: ASTRA, CASSANDRA, FILE
-mode = "ASTRA"
+#mode = "ASTRA"
 #mode = "CASSANDRA"
-#mode = "FILE"
+mode = "FILE"
 
 
 # Cassandra connection
@@ -10,18 +10,22 @@ cassandra_port = 9042
 keyspace = "killrvideo"
 
 # Schema file
-schema_directory = "test/schema"
+schema_file = "test/schema/killrvideo-schema.cql"
 
 # Logging 
 log_level = "INFO"
 
-# LLM provider info: AZURE, GCP, BEDROCK, OLLAMA, OPENAI
+# LLM provider info: AZURE, VERTEXAI, BEDROCK, OLLAMA, OPENAI
 #llm_provider = "OPENAI"
-llm_provider = "BEDROCK"
+#llm_provider = "BEDROCK"
+llm_provider = "VERTEXAI"
+
 
 # Azure GPT
 
-# GCP VertexAI
+# GCP VertexAI (You'll need to use the glcoud CLI to authenticate)
+vertexai_model_name = "vertex_ai/gemini-pro"
+vertexai_location = "us-central1"
 
 # AWS Bedrock
 aws_bedrock_model_name = "bedrock/anthropic.claude-instant-v1"

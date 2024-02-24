@@ -48,7 +48,7 @@ def create_prompt(schema_statements):
     with open("helper_docs/prompt_question.txt", 'r') as f:
         question = f.read()
 
-    prompt = f"Given the schema: \n{' '.join(schema_statements)}\n\nAnswer the following questions:\n\n{question}"
+    prompt = f"Given the schema: \n{schema_statements}\n\nAnswer the following questions:\n\n{question}"
 
     logger.info(f"Prompt created: {prompt}")
     return prompt
@@ -75,14 +75,21 @@ def main():
     # Call the initialize_logging function to set up the logging mechanism
     initialize_logging(settings.log_level)
 
-    # Connect to the Astra database
-    cassandra_utils = CassandraUtils()
+    if (settings.mode=="FILE"):
+        print(f"Reading schema from file: {settings.schema_file}")
+        logger.info(f"Reading schema from file: {settings.schema_file}")
 
-    logger.info(f"Generating CREATE TABLE statements for keyspace: {settings.keyspace}")
-    print(f"Generating CREATE TABLE statements for keyspace: {settings.keyspace}")
-    statements = cassandra_utils.generate_create_table_statements()
+        with open(settings.schema_file, 'r') as file:
+            statements = file.read()
+    else:
+        # Connect to the Astra database
+        cassandra_utils = CassandraUtils()
 
-    logger.info(f"Generated {len(statements)} CREATE TABLE statements")
+        logger.info(f"Generating CREATE TABLE statements for keyspace: {settings.keyspace}")
+        print(f"Generating CREATE TABLE statements for keyspace: {settings.keyspace}")
+        statements = cassandra_utils.generate_create_table_statements()
+
+        logger.info(f"Generated {len(statements)} CREATE TABLE statements")
 
     prompt = create_prompt(statements)
 
