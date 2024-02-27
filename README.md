@@ -1,8 +1,10 @@
 ![alt text](image-1.png)
 # Cassandra AI Accelerator
-This project is a Python application that uses a Cassandra schema to generate recommended use cases for Generative AI.
+This project is a Python application that uses a Cassandra schema to generate recommended use cases for Generative AI. 
 
 The output is a Markdown formatted report you can find in `report_output` It will describe the use case(s) for your schema and suggest any GenAI use cases you could add. It will then give you the exact table changes needed to implement the idea you want!
+
+**Warning**: The best results are with GPT4. I've tested with other models, such as Claude 2 and Llama2. None produce results as good as GPT4. I'll continue to test models for accuracy. 
 
 ## Getting Started
 
@@ -32,11 +34,11 @@ Pending
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/your-repo-name.git
+    git clone https://github.com/pmcfadin/cassandra_ai_accelerator.git
     ```
 2. Navigate to the project directory:
     ```sh
-    cd your-repo-name
+    cd cassandra_ai_accelerator
     ```
 3. Install the required Python packages:
     ```sh
@@ -45,38 +47,27 @@ Pending
 
 ### Configuration
 
-Before running the application, you need to set up your configuration in the `settings.toml` file:
+Before running the application, you need to set up your configuration in the `settings.toml` file. There are defaults but you can make any needed changes.
 
-- `mode`: Operating mode. ASTRA is the only current choice
-- `log_level`: The logging level. Default is INFO
-- `model_system_role`: Role info to model. The default is probably fine
-- `openai_model`: GPT model. Default included
-
-For sensative data, rename the `example.settings.toml` file into `.settings.toml` and change the following
-- `client_id`: Your Astra DB client ID.
-- `client_secret`: Your Astra DB client secret.
-- `secure_connect_bundle_path`: The path to your Astra DB secure connect bundle.
-- `keyspace`: The keyspace to generate CREATE TABLE statements for.
-- `openai_api_key`: Single use key from OpenAI
+For sensative data, rename the `example.settings.toml` file into `.settings.toml` and change setting for your use case. 
 
 ### Usage
 
-To run the application, execute the `turtle_dive.py` script:
+To run the application, execute the `app.py` script:
 
 ```sh
-python turtle_dive.py
+python app.py
 ```
 
 ### Todo List
  - Allow for Local LLM usage. Privacy concerns
  - Fine-tune an LLM for this specific task (Better answers)
  - Make the use case exploration interactive for more specific use cases
- - Allow for either Astra or Cassandra targets (Shouldn't be hard. Just change the connect type)
  - Add more types of reports. SAI conversion. Schema optimization
  - Analyze data and suggest how data could be vectorized
  - (Stretch) Create sample code for LangChain or LlamaIndex or ...
 ---
-### Sample report output
+### Sample report output (GPT4)
 
 # Evaluation of the CQL schema and Generative AI Opportunities
 
