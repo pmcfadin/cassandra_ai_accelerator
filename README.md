@@ -1,8 +1,6 @@
-# Astra Turtle
-![Turtles all the way down image](image.png)
-Using GenAI to make more GenAI. Turtles all the way down...
-
-This project is a Python application that interacts with  DataStax Astra to generate CREATE TABLE statements for a given keyspace and uses them to create recommended use cases for Generative AI.
+![alt text](image-1.png)
+# Cassandra AI Accelerator
+This project is a Python application that uses a Cassandra schema to generate recommended use cases for Generative AI.
 
 The output is a Markdown formatted report you can find in `report_output` It will describe the use case(s) for your schema and suggest any GenAI use cases you could add. It will then give you the exact table changes needed to implement the idea you want!
 
@@ -14,8 +12,21 @@ These instructions will get you a copy of the project up and running on your loc
 
 - Python 3.6 or higher
 - pip
+
+Depending on your use case, one of the following is needed to extract the use cases. 
 - A DataStax Astra instance
-- An OpenAI API key
+- DataStax Enterprise instance
+- Apache Cassandra® instance
+- Exported schema file
+
+A variety of LLMs APIs are supported.
+- OpenAI
+- GCP Vertex AI
+- AWS Bedrock
+
+Pending
+- Azure GPT
+- Ollama(local)
 
 ### Installation
 
@@ -34,10 +45,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Configuration
 
-Before running the application, you need to set up your configuration in the `example-config.yaml` file:
+Before running the application, you need to set up your configuration in the `settings.toml` file:
 
 - `mode`: Operating mode. ASTRA is the only current choice
-- `log_level`: The logging level. Default is 
+- `log_level`: The logging level. Default is INFO
 - `model_system_role`: Role info to model. The default is probably fine
 - `openai_model`: GPT model. Default included
 
