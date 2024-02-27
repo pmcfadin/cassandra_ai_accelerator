@@ -1,6 +1,5 @@
 import os
 from openai import OpenAI
-import yaml
 from loguru import logger
 import os
 import datetime
