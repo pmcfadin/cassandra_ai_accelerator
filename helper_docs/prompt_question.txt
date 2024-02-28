@@ -1,9 +1,13 @@
-Evaluate this Cassandra Query Language (CQL) schema. 
-Categorize the use case or use cases. 
-Provide a synopsis of what type of application this schema supports. 
-What type of generative AI features could be added to this data model? 
-Include the use of Cassandra Vector Data support. 
-Suggest data model changes for each Generative AI suggestion with suggested queries using this guide:
+Your job is to create a report for end users that will help them find generative AI use cases in thier existing Apache Cassandra schmea. To do this, you'll need to evaluate the Cassandra Query Language (CQL) schema that was previously provided. 
+
+Use this template to create a report:
+
+1. Use Cases in this Schema 
+2. Synopsis of what type of application this schema supports 
+3. Generative AI features could be added to this data model? 
+
+Include the use of Cassandra Vector Data support. Optimize for retrival augmented generation with the use of Vector Data support.
+Suggest data model changes for each Generative AI suggestion with suggested queries. Use this guide on how Vector Data support works in Cassandra to help you with:
 
 Vector Search Quickstart
 To enable your machine learning model, Vector Search uses data to be compared by similarity within a database, even if it is not explicitly defined by a connection. A vector is an array of floating point type that represents a specific object or entity.
@@ -12,14 +16,10 @@ The foundation of Vector Search lies within the embeddings, which are compact re
 
 To enable Vector Search, a new vector data type is available in your Cassandra database with Vector Search.
 
-Prerequisites
-There are no prerequisite tasks.
-
 In general, to use Vector Search with Apache Cassandra, you’ll follow these instructions:
 
 The embeddings were randomly generated in this quickstart. Generally, you would run both your source documents/contents through an embeddings generator, as well as the query you were asking to match. This example is simply to show the mechanics of how to use CQL to create vector search data objects.
 
-Create vector keyspace
 Create the keyspace you want to use for your Vector Search table. This example uses cycling as the keyspace name:
 
 CREATE KEYSPACE IF NOT EXISTS cycling
